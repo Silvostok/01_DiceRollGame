@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -38,33 +39,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/score" />
 
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="368dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/diceImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/highscore" />
+
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/higherImageView"
         android:layout_width="32dp"
         android:layout_height="31dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="450dp"
         android:adjustViewBounds="false"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        android:background="@android:color/holo_orange_light"
+        app:layout_constraintEnd_toStartOf="@+id/diceImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/arrow_up_float" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/lowImageView"
         android:layout_width="26dp"
         android:layout_height="33dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="450dp"
+        android:background="@android:color/holo_orange_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/diceImageView"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/arrow_down_float" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/diceImageView"
         android:layout_width="129dp"
         android:layout_height="112dp"
         android:layout_marginBottom="20dp"
@@ -72,21 +88,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/lowImageView"
+        app:layout_constraintStart_toEndOf="@+id/higherImageView"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/d1" />
-
-    <ListView
-        android:layout_width="368dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/highscore" />
 
 </android.support.constraint.ConstraintLayout>
