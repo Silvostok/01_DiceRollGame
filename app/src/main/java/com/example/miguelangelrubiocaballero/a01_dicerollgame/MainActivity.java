@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     ConstraintLayout mView;
 
 
-
     int[] mDrawableDices = new int[]{R.drawable.d1, R.drawable.d2, R.drawable.d3
             , R.drawable.d4, R.drawable.d5, R.drawable.d6};
     List<Integer> winsArray = new ArrayList<>();
@@ -64,14 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         ButterKnife.bind(this);
-
         mDices = new ArrayList<>();
         beginNumber = setRandom();
 
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mDices);
-
         mListView.setAdapter(mAdapter);
-
     }
 
 
@@ -106,11 +102,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
     }
     @OnClick(R.id.higherImageView)
     public void roleDiceHigher() {
-
 
         int N = mDrawableDices.length;
         int next = mRandom.nextInt(N);
@@ -140,9 +134,6 @@ public class MainActivity extends AppCompatActivity {
             higscoreCounter = 0;
         }
 
-
-
-
     }
 
     public int setRandom() {
@@ -151,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         mDice.setImageResource(mDrawableDices[next]);
         return next;
     }
-
 
 
     private void highscoreChecker() {
