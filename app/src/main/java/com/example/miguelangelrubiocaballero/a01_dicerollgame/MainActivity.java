@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     int[] mImagesDices = new int[]{R.drawable.d1, R.drawable.d2, R.drawable.d3
             , R.drawable.d4, R.drawable.d5, R.drawable.d6};
 
-    // List to stores wins
+    // List to store wins scores
     List<Integer> winsArray = new ArrayList<>();
 
     // counter for win and high score labels
