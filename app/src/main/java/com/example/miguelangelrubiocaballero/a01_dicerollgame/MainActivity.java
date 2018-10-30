@@ -25,6 +25,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    //find and automatically cast the corresponding view in the layout
     @BindView(R.id.score)
     TextView mScore;
     @BindView(R.id.highscore)
@@ -40,15 +42,24 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.mainConstraintLayout)
     ConstraintLayout mView;
 
-
-    int[] mDrawableDices = new int[]{R.drawable.d1, R.drawable.d2, R.drawable.d3
+    // Array to store all images names from drawable
+    int[] mImagesDices = new int[]{R.drawable.d1, R.drawable.d2, R.drawable.d3
             , R.drawable.d4, R.drawable.d5, R.drawable.d6};
-    List<Integer> winsArray = new ArrayList<>();
-    int winCounter = 0;
-    int higscoreCounter = 0;
 
+    // List to stores wins
+    List<Integer> winsArray = new ArrayList<>();
+
+    // counter for win and high score labels
+    int winCounter = 0;
+    int highscoreCounter = 0;
+
+    // List of dices
     private List<Dice> mDices;
+
+    // Array of Adapter
     private ArrayAdapter mAdapter;
+
+    // Random class
     private Random mRandom = new Random();
     int beginNumber;
     private int wins = 0;
@@ -61,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        //Binds all views on this activity
         ButterKnife.bind(this);
         mDices = new ArrayList<>();
         beginNumber = setRandom();
@@ -70,48 +81,51 @@ public class MainActivity extends AppCompatActivity {
         mListView.setAdapter(mAdapter);
     }
 
-
+    // set dice image, throw random dice, if random < next, dis paly win and update win & high score counter.
+    //otherway display lose and update win & high score counter
     @OnClick(R.id.lowImageView)
     public void roleDiceLower() {
 
-        int N = mDrawableDices.length;
+        int N = mImagesDices.length;
         int next = mRandom.nextInt(N);
-        mDice.setImageResource(mDrawableDices[next]);
-        //Get the user text from the textfield
+        mDice.setImageResource(mImagesDices[next]);
+
         int random = setRandom();
         Dice newThrow = new Dice(random);
+
         mDices.add(newThrow);
         mAdapter.notifyDataSetChanged();
 
         if (random < next) {
             Snackbar.make(mView, "Win", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             winCounter = ++wins;
-            mScore.setText("Score:  " + winCounter);
-            higscoreCounter = ++highscore;
+            mScore.setText("Score: " + winCounter);
+            highscoreCounter = ++highscore;
 
         } else {
             Snackbar.make(mView, "Lose", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             winCounter = 0;
             wins = 0;
             mScore.setText("Score: " + winCounter);
-            mHighScore.setText("HighScore: " + higscoreCounter);
-            winsArray.add(higscoreCounter);
+            mHighScore.setText("HighScore: " + highscoreCounter);
+            winsArray.add(highscoreCounter);
             highscoreChecker();
             highscore = 0;
-            higscoreCounter = 0;
+            highscoreCounter = 0;
         }
 
-
     }
+
+    // set dice image, throw random dice, if random < next, dis paly win and update win & high score counter.
+    //otherway display lose and update win & high score counter
     @OnClick(R.id.higherImageView)
     public void roleDiceHigher() {
 
-        int N = mDrawableDices.length;
+        int N = mImagesDices.length;
         int next = mRandom.nextInt(N);
-        mDice.setImageResource(mDrawableDices[next]);
+        mDice.setImageResource(mImagesDices[next]);
         int random = setRandom();
         Dice newThrow = new Dice(random);
-
 
         mDices.add(newThrow);
         mAdapter.notifyDataSetChanged();
@@ -119,31 +133,32 @@ public class MainActivity extends AppCompatActivity {
             //Show a message to the user if the textfield is empty
             Snackbar.make(mView, "Win", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             winCounter = ++wins;
-
             mScore.setText("Score:  " + winCounter);
-            higscoreCounter = ++highscore;
+            highscoreCounter = ++highscore;
+
         } else {
             Snackbar.make(mView, "Lose", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             wins = 0;
             winCounter = 0;
             mScore.setText("Score: " + winCounter);
-            mHighScore.setText("HighScore: " + higscoreCounter);
-            winsArray.add(higscoreCounter);
+            mHighScore.setText("HighScore: " + highscoreCounter);
+            winsArray.add(highscoreCounter);
             highscoreChecker();
             highscore = 0;
-            higscoreCounter = 0;
+            highscoreCounter = 0;
         }
 
     }
 
+    //calculate Random number
     public int setRandom() {
-        int N = mDrawableDices.length;
+        int N = mImagesDices.length;
         int next = mRandom.nextInt(N);
-        mDice.setImageResource(mDrawableDices[next]);
+        mDice.setImageResource(mImagesDices[next]);
         return next;
     }
 
-
+    // check high score
     private void highscoreChecker() {
         if (winsArray.size() == 1) {
             mHighScore.setText("HighScore: " + winsArray.get(0));
@@ -151,30 +166,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mHighScore.setText("HighScore: " + Collections.max(winsArray));
         }
-    }
-
-//-------------
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }
